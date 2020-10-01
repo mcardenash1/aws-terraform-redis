@@ -1,0 +1,115 @@
+variable "name" {
+  type        = string
+  description = "The replication group identifier. This parameter is stored as a lowercase string."
+}
+
+variable "number_cache_clusters" {
+  type        = string
+  description = "The number of cache clusters (primary and replicas) this replication group will have."
+}
+
+variable "node_type" {
+  type        = string
+  description = "The compute and memory capacity of the nodes in the node group."
+}
+
+variable "subnet_ids" {
+  type        = list(string)
+  description = "List of VPC Subnet IDs for the cache subnet group."
+}
+
+variable "vpc_id" {
+  type        = string
+  description = "VPC Id to associate with Redis ElastiCache."
+}
+
+variable "source_cidr_blocks" {
+  type        = list(string)
+  description = "List of source CIDR blocks."
+}
+
+variable "engine_version" {
+  default     = "5.0.6"
+  type        = string
+  description = "The version number of the cache engine to be used for the cache clusters in this replication group."
+}
+
+variable "port" {
+  default     = 6379
+  type        = number
+  description = "The port number on which each of the cache nodes will accept connections."
+}
+
+variable "maintenance_window" {
+  default     = "mon:10:40-mon:11:40"
+  type        = string
+  description = "Specifies the weekly time range for when maintenance on the cache cluster is performed."
+}
+
+variable "snapshot_window" {
+  default     = "06:30-07:30"
+  type        = string
+  description = "The daily time range (in UTC) during which ElastiCache will begin taking a daily snapshot of your cache cluster."
+}
+
+variable "snapshot_retention_limit" {
+  type        = number
+  description = "The number of days for which ElastiCache will retain automatic cache cluster snapshots before deleting them."
+}
+
+variable "automatic_failover_enabled" {
+  default     = true
+  type        = bool
+  description = "Specifies whether a read-only replica will be automatically promoted to read/write primary if the existing primary fails."
+}
+
+variable "at_rest_encryption_enabled" {
+  type        = bool
+  description = "Whether to enable encryption at rest."
+}
+
+variable "transit_encryption_enabled" {
+  type        = bool
+  description = "Whether to enable encryption in transit."
+}
+
+variable "apply_immediately" {
+  default     = false
+  type        = bool
+  description = "Specifies whether any modifications are applied immediately, or during the next maintenance window."
+}
+
+variable "family" {
+  type        = string
+  description = "The family of the ElastiCache parameter group."
+}
+
+variable "description" {
+  default     = "Managed by Terraform"
+  type        = string
+  description = "The description of the all resources."
+}
+
+variable "tags" {
+  default     = {}
+  type        = map(string)
+  description = "A mapping of tags to assign to all resources."
+}
+
+variable "alarm_cpu_threshold_percent" {
+  type        = number
+  default     = 75
+  description = "CPU threshold alarm level"
+}
+
+variable "alarm_actions" {
+  type        = list(string)
+  description = "Alarm action list"
+  default     = []
+}
+
+variable "ok_actions" {
+  type        = list(string)
+  description = "The list of actions to execute when this alarm transitions into an OK state from any other state. Each action is specified as an Amazon Resource Number (ARN)"
+  default     = []
+}
